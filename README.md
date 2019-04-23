@@ -1,2 +1,2 @@
-# Giant-Encryption-Alhorithm
+# Giant-Encryption-Algorithm
 My Encryption program 
