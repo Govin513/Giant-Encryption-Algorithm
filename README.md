@@ -1,2 +1,5 @@
 # Giant-Encryption-Algorithm
-My Encryption program 
+Program do Szyfrowania i Steganografii
+
+Kompilacja:
+g++ -Ofast [Kod Źródłowy].cpp
