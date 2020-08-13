@@ -23,7 +23,6 @@ class GEA {
   unsigned char v;
   unsigned char q;
   unsigned char p;
-  unsigned char nr;
   unsigned char rp;
   unsigned char sbox[256];
   unsigned char pbox[256];
@@ -770,23 +769,23 @@ class GEA {
   }
   //Rotacja w Lewo
   void lrotating() {
-    for (char i = 0; i < 4; i++)
-      rotl(zt[i + (nr * 4)], keys[f + 96][i + (rp * 4) + (nr * 32)] % 64);
+    for (char i = 0; i < 32; i++)
+      rotl(zt[i], keys[f + 96][i + (rp * 8)] % 64);
   }
   //Rotacja w Prawo
   void rrotating() {
-    for (char i = 0; i < 4; i++)
-      rotr(zt[i + (nr * 4)], keys[f + 96][i + (rp * 4) + (nr * 32)] % 64);
+    for (char i = 0; i < 32; i++)
+      rotr(zt[i], keys[f + 96][i + (rp * 8)] % 64);
   }
   //XOR Fukcji Transformacji Liniowej
   void xoring() {
-    for (char i = 0; i < 4; i++)
-      zt[((i + 1) % 4) + (nr * 4)] ^= zt[i + (nr * 4)] ^ zt[((i + 2) % 4) + (nr * 4)];
+    for (char i = 0; i < 32; i++)
+      zt[(i + 1) % 32] ^= zt[i] ^ zt[(i + 2) % 32];
   }
   //XOR Odwrotnej Fukcji Transformacji Liniowej
   void ixoring() {
-    for (char i = 3; i >= 0; i--)
-      zt[((i + 1) % 4) + (nr * 4)] ^= zt[i + (nr * 4)] ^ zt[((i + 2) % 4) + (nr * 4)];
+    for (char i = 31; i >= 0; i--)
+      zt[(i + 1) % 32] ^= zt[i] ^ zt[(i + 2) % 32];
   }
   //Funkcja Transformacji
   void tfunction() {
@@ -801,12 +800,9 @@ class GEA {
   //Transformacja
   void transformation() {
     to64t();
-    for (char r = 0; r < 8; r++) {
-      nr = r;
-      for (char i = 0; i < 8; i++) {
+    for (char i = 0; i < 8; i++) {
         rp = i;
         tfunction();
-      }
     }
     tobt();
     for (char j = 0; j < 32; j++)
@@ -815,12 +811,9 @@ class GEA {
   //Odwrotna Transformacja
   void itransformation() {
     to64t();
-    for (char r = 0; r < 8; r++) {
-      nr = r;
-      for (char i = 0; i < 8; i++) {
+    for (char i = 0; i < 8; i++) {
         rp = i;
         itfunction();
-      }
     }
     tobt();
     for (char j = 0; j < 32; j++)
