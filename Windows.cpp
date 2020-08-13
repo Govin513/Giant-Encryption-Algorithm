@@ -770,12 +770,12 @@ class GEA {
   //Rotacja w Lewo
   void lrotating() {
     for (char i = 0; i < 32; i++)
-      rotl(zt[i], keys[f + 96][i + (rp * 8)] % 64);
+      rotl(zt[i], keys[f + 96][i + (rp * 32)] % 64);
   }
   //Rotacja w Prawo
   void rrotating() {
     for (char i = 0; i < 32; i++)
-      rotr(zt[i], keys[f + 96][i + (rp * 8)] % 64);
+      rotr(zt[i], keys[f + 96][i + (rp * 32)] % 64);
   }
   //XOR Fukcji Transformacji Liniowej
   void xoring() {
